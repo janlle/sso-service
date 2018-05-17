@@ -1,0 +1,32 @@
+server:
+  port: 8081
+  servlet-path: /clientb
+security:
+  oauth2:
+    client:
+#      client-id: clientB
+#      client-secret: clientsecret2
+#      user-authorization-uri: http://127.0.0.1:9999/server/oauth/authorize
+#      access-token-uri: http://127.0.0.1:9999/server/oauth/token
+      clientId: clientB
+      clientSecret: clientsecret2
+      accessTokenUri: http://localhost:9999/server/oauth/token
+      userAuthorizationUri: http://localhost:9999/server/oauth/authorize
+    resource:
+      jwt:
+        key-uri: http://127.0.0.1:9999/server/oauth/token_key
+logging:
+  level:
+    org.springframework: debug
+
+#security:
+#  basic:
+#    enabled: false
+#  oauth2:
+#    client:
+#      clientId: SampleClientId
+#      clientSecret: secret
+#      accessTokenUri: http://localhost:8081/auth/oauth/token
+#      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
+#    resource:
+#      userInfoUri: http://localhost:8081/auth/user/me

@@ -1,0 +1,6 @@
+server:
+  port: 9999
+  servlet-path: /server
+security:
+  user:
+    password: andy
