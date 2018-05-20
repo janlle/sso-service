@@ -40,6 +40,26 @@ public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
             .authenticated();
     }
 
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.formLogin().loginPage("/authentication/require")
+//                .loginProcessingUrl("/authentication/form")
+//                .and().authorizeRequests()
+//                .antMatchers("/authentication/require",
+//                        "/authentication/form",
+//                        "/**/*.js",
+//                        "/**/*.css",
+//                        "/**/*.jpg",
+//                        "/**/*.png",
+//                        "/**/*.woff2"
+//                )
+//                .permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .csrf().disable();
+////        http.formLogin().and().authorizeRequests().anyRequest().authenticated();
+//    }
+
 
 
 

@@ -17,19 +17,19 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  * @createBy: 2018-05-07 21:10
  **/
 @Configuration
-//@EnableAuthorizationServer
+@EnableAuthorizationServer
 public class SSOAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-        .withClient("clientA")
-        .secret("clientsecret1")
+        .withClient("clienta")
+        .secret("secreta")
         .authorizedGrantTypes("authorization_code", "refresh_token")
         .scopes("all")
         .and()
-        .withClient("clientB")
-        .secret("clientsecret2")
+        .withClient("clientb")
+        .secret("secretb")
         .authorizedGrantTypes("authorization_code", "refresh_token")
         .scopes("all");
     }

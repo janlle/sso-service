@@ -1,4 +1,4 @@
-package com.andy.sso;
+package com.andy.sso.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 @EnableOAuth2Sso
-public class SSOClient {
+public class SSOClientB {
 
     public static void main(String[] args) {
-        SpringApplication.run(SSOClient.class, args);
+        SpringApplication.run(SSOClientB.class, args);
     }
 
     @GetMapping("/user")
