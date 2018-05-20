@@ -3,4 +3,5 @@ server:
   servlet-path: /server
 security:
   user:
-    password: andy
+    password: server
+

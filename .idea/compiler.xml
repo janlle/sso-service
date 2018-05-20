@@ -7,14 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="sso-client" />
+        <module name="sso-client-A" />
         <module name="sso-client-app" />
+        <module name="sso-client-B" />
         <module name="sso-server" />
         <module name="ssoservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="sso-client" target="1.8" />
+      <module name="sso-client-A" target="1.8" />
       <module name="sso-client-app" target="1.8" />
+      <module name="sso-client-B" target="1.8" />
       <module name="sso-server" target="1.8" />
       <module name="sso-service" target="1.8" />
       <module name="ssoservice" target="1.5" />

@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private SsoUserDetailService ssoUserDetailService;
+    private UserDetailsService userDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -27,7 +27,7 @@ public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(ssoUserDetailService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -59,8 +59,5 @@ public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf().disable();
 ////        http.formLogin().and().authorizeRequests().anyRequest().authenticated();
 //    }
-
-
-
 
 }

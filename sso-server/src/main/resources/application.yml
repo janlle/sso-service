@@ -4,3 +4,4 @@ server:
 security:
   user:
     password: server
+

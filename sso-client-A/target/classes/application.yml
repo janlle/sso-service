@@ -1,0 +1,13 @@
+server:
+  port: 8081
+  servlet-path: /clienta
+security:
+  oauth2:
+    client:
+      clientId: clienta
+      clientSecret: secreta
+      access-token-uri: http://localhost:9999/server/oauth/token
+      user-authorization-uri: http://localhost:9999/server/oauth/authorize
+    resource:
+      jwt:
+        key-uri: http://127.0.0.1:9999/server/oauth/token_key
