@@ -21,17 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class SSOClientA {
 
-    @Autowired
-    private OAuth2RestTemplate oAuth2RestTemplate;
+//    @Autowired
+//    private OAuth2RestTemplate oAuth2RestTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(SSOClientA.class, args);
     }
 
-    @GetMapping("/user")
-    public Authentication user(Authentication user) {
-        return user;
-    }
+//    @GetMapping("/user")
+//    public Authentication user(Authentication user) {
+//        return user;
+//    }
 
 //    @Bean
 //    public RestTemplate restTemplate() {
@@ -40,9 +40,9 @@ public class SSOClientA {
 //        return restTemplate;
 //    }
 
-    @Bean
-    public OAuth2RestTemplate oAuth2RestTemplate(OAuth2ClientContext oAuth2ClientContext, OAuth2ProtectedResourceDetails details){
-        return new OAuth2RestTemplate(details,oAuth2ClientContext);
-    }
+//    @Bean
+//    public OAuth2RestTemplate oAuth2RestTemplate(OAuth2ClientContext oAuth2ClientContext, OAuth2ProtectedResourceDetails details){
+//        return new OAuth2RestTemplate(details,oAuth2ClientContext);
+//    }
 
 }
