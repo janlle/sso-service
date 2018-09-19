@@ -14,9 +14,14 @@ import java.security.Principal;
 @RestController
 public class UserController {
 
-    @GetMapping("/user/me")
+    @GetMapping("/user")
     public Principal user(Principal principal) {
         return principal;
+    }
+
+    @GetMapping("/auth")
+    public void auth(String code) {
+        System.out.println(code);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.andy.oauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -8,6 +9,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * <p>
@@ -23,10 +27,25 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.tokenKeyAccess("permitAll()")           //能够获取token的
                 .checkTokenAccess("isAuthenticated()");     //检测是否认证
     }
+
+
+//    @Override
+//    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+//        clients.inMemory()
+//                .withClient("client1")
+//                .secret("client1")
+//                .authorizedGrantTypes("authorization_code", "refresh_token")
+//                .scopes("all")
+//                .and()
+//                .withClient("client2")
+//                .secret("client2")
+//                .authorizedGrantTypes("authorization_code", "refresh_token")
+//                .scopes("all");
+//    }
 
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
@@ -40,7 +59,25 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager);
+        endpoints.tokenStore(jwtTokenStore()).accessTokenConverter(jwtAccessTokenConverter());
+    }
+
+//    @Override
+//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+//        endpoints.authenticationManager(authenticationManager);
+//    }
+
+    @Bean
+    public TokenStore jwtTokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        // 保证JWT安全的唯一方式
+        jwtAccessTokenConverter.setSigningKey("ZPW");
+        return jwtAccessTokenConverter;
     }
 
 }
