@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018-05-07 21:25
  **/
 @RestController
-@SpringBootApplication
 @EnableOAuth2Sso
-public class SSOClientB {
+@SpringBootApplication
+public class SsoClientB {
 
     @Autowired
     private OAuth2RestTemplate oAuth2RestTemplate;
 
     public static void main(String[] args) {
-        SpringApplication.run(SSOClientB.class, args);
+        SpringApplication.run(SsoClientB.class, args);
     }
 
     @GetMapping("/user")
