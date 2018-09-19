@@ -1,6 +1,6 @@
 server:
   port: 8082
-  context-path: /ui
+  context-path: /server
   session:
     cookie:
       name: UISESSION
@@ -20,3 +20,7 @@ security:
 spring:
   thymeleaf:
     cache: false
+
+
+#security.oauth2.client.authorized-grant-types: authorization_code,refresh_token,password
+#security.oauth2.client.scope: openid
