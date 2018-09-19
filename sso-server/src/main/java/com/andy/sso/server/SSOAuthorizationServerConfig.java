@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * @author Leone
- * @createBy: 2018-05-07 21:10
+ * @since 2018-05-07 21:10
  **/
 @Configuration
 public class SSOAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
