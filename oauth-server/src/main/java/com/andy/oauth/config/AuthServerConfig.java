@@ -21,24 +21,26 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
- 
+
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+    public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer.tokenKeyAccess("permitAll()")           //能够获取token的
+                .checkTokenAccess("isAuthenticated()");     //检测是否认证
     }
- 
+
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-          .withClient("SampleClientId")
-          .secret("secret")
-          .authorizedGrantTypes("authorization_code")
-          .scopes("user_info")
-          .autoApprove(true) ; 
+                .withClient("SampleClientId")               //接受的clientId
+                .secret("secret")                           //默认secret
+                .authorizedGrantTypes("authorization_code") //授权模式
+                .scopes("user_info")                        //范围，只获取用户认证。
+                .autoApprove(true);
     }
- 
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager);
     }
+
 }
