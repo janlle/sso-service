@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
- * @author: Mr.ruoLin
+ * @author Leone
  * @createBy: 2018-05-07 21:10
  **/
 @Configuration

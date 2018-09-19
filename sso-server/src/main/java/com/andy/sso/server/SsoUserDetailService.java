@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * @author: Mr.ruoLin
+ * @author Leone
  * @createBy: 2018-05-07 22:09
  **/
 @Component
