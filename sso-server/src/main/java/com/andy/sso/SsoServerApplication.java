@@ -6,12 +6,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 /**
  * @author Leone
- * @since 2018-05-07 21:09
+ * @since 2018-05-07
  **/
 @SpringBootApplication
 @EnableAuthorizationServer
-public class SSOServerApp {
+public class SsoServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SSOServerApp.class, args);
+        SpringApplication.run(SsoServerApplication.class, args);
     }
 }

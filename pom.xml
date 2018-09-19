@@ -9,6 +9,8 @@
         <module>sso-server</module>
         <module>sso-client-A</module>
         <module>sso-client-B</module>
+        <module>resource-server</module>
+        <module>oauth-server</module>
     </modules>
 
     <groupId>com.andy.sso</groupId>

@@ -1,6 +1,7 @@
 package com.andy.sso.server;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,11 +12,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
+ *
  * @author Leone
- * @since 2018-05-07 22:06
+ * @since 2018-05-07
  **/
 @Configuration
-public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableOAuth2Sso
+public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -32,8 +35,7 @@ public class SSOSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-            .formLogin()
+        http.formLogin()
             .and()
             .authorizeRequests()
             .anyRequest()
