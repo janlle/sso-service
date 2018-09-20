@@ -1,26 +1,22 @@
 server:
-  port: 8082
+  port: 9999
   context-path: /server
-  session:
-    cookie:
-      name: UISESSION
 security:
   user:
     password: server
   basic:
-    enabled: false
+    enabled: true
   oauth2:
     client:
-      clientId: SampleClientId
-      clientSecret: secret
+      clientId: wechat
+      clientSecret: wechat
       accessTokenUri: http://localhost:8081/auth/oauth/token
       userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
     resource:
-      userInfoUri: http://localhost:8081/auth/user/me
+      userInfoUri: http://localhost:8081/auth/user
 spring:
   thymeleaf:
     cache: false
-
 
 #security.oauth2.client.authorized-grant-types: authorization_code,refresh_token,password
 #security.oauth2.client.scope: openid
