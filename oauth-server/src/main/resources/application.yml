@@ -1,11 +1,9 @@
 server:
+  servlet:
+    path: /server
   port: 9999
-  context-path: /server
+
 security:
-  user:
-    password: server
-  basic:
-    enabled: true
   oauth2:
     client:
       clientId: wechat
@@ -17,6 +15,10 @@ security:
 spring:
   thymeleaf:
     cache: false
+  security:
+#    user:
+#      name: admin
+#      password: admin
 
 #security.oauth2.client.authorized-grant-types: authorization_code,refresh_token,password
 #security.oauth2.client.scope: openid
