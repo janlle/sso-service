@@ -4,10 +4,10 @@ server:
 security:
   oauth2:
     client:
-      clientId: clientb
-      clientSecret: secretb
-      access-token-uri: http://localhost:9999/server/oauth/token
-      user-authorization-uri: http://localhost:9999/server/oauth/authorize
+      clientId: clientB
+      clientSecret: secretB
+      access-token-uri: http://127.0.0.1:9999/server/oauth/token
+      user-authorization-uri: http://127.0.0.1:9999/server/oauth/authorize
     resource:
       jwt:
         key-uri: http://127.0.0.1:9999/server/oauth/token_key

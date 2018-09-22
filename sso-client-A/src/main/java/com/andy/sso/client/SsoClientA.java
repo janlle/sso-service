@@ -29,17 +29,17 @@ public class SsoClientA {
         SpringApplication.run(SsoClientA.class, args);
     }
 
-    @GetMapping("/user")
-    public Authentication user(Authentication user) {
-        return user;
-    }
+//    @GetMapping("/user")
+//    public Authentication user(Authentication user) {
+//        return user;
+//    }
 
-    @Bean
-    public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        return restTemplate;
-    }
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        RestTemplate restTemplate = new RestTemplate();
+//        restTemplate.getMessageConverters().add(new StringHttpMessageConverter(StandardCharsets.UTF_8));
+//        return restTemplate;
+//    }
 
 //    @Bean
 //    public OAuth2RestTemplate oAuth2RestTemplate(OAuth2ClientContext oAuth2ClientContext, OAuth2ProtectedResourceDetails details){

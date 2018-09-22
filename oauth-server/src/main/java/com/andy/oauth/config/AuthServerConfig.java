@@ -50,12 +50,12 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
                 .withClient("clientA")                       //clientId
                 .secret("secretA")                           //secret
-                .authorizedGrantTypes("authorization_code")  //授权模式
+                .authorizedGrantTypes("authorization_code", "refresh_token")  //授权模式
                 .scopes("all")                               //范围，只获取用户认证。
                 .and()
                 .withClient("clientB")
                 .secret("secretB")
-                .authorizedGrantTypes("authorization_code")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
                 .scopes("all")
 //                .autoApprove(true)
         ;
