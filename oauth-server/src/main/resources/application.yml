@@ -4,18 +4,20 @@ server:
   port: 9999
 
 security:
-  oauth2:
-    client:
-      clientId: wechat
-      clientSecret: wechat
-      accessTokenUri: http://localhost:8081/auth/oauth/token
-      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
-    resource:
-      userInfoUri: http://localhost:8081/auth/user
-spring:
-  thymeleaf:
-    cache: false
-  security:
+#  oauth2:
+#    client:
+#      clientId: wechat
+#      clientSecret: wechat
+#      accessTokenUri: http://localhost:8081/auth/oauth/token
+#      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize
+#    resource:
+#      userInfoUri: http://localhost:8081/auth/user
+  user:
+    password: admin
+#spring:
+#  thymeleaf:
+#    cache: false
+#  security:
 #    user:
 #      name: admin
 #      password: admin
