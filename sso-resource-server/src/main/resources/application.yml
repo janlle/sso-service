@@ -1,1 +1,12 @@
-
+server:
+  port: 8083
+  context-path: /resource
+security:
+  oauth2:
+    client:
+      client-id: client1
+      client-secret: secret1
+    resource:
+      token-info-uri: http://127.0.0.1:8082/auth_server/oauth/check-token
+      jwt:
+        key-uri: http://127.0.0.1:8082/auth_server/oauth/token_key
