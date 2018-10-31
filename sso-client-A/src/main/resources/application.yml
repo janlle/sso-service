@@ -1,6 +1,6 @@
 server:
   port: 8080
-  servlet-path: /clienta
+  context-path: /clienta
 security:
   oauth2:
     client:
