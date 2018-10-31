@@ -13,10 +13,11 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * @author Leone
- * @since 2018-05-07 21:10
+ * @since 2018-05-07
  **/
 @Configuration
-public class SSOAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+@EnableAuthorizationServer
+public class SsoAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -46,7 +47,7 @@ public class SSOAuthorizationServerConfig extends AuthorizationServerConfigurerA
     }
 
     /**
-     * 配置jwttokenStore
+     * 配置jwtTokenStore
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -54,7 +55,7 @@ public class SSOAuthorizationServerConfig extends AuthorizationServerConfigurerA
     }
 
     /**
-     * springSecurity 授权表达式，访问merryyou tokenkey时需要经过认证
+     * springSecurity 授权表达式，
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -62,7 +63,7 @@ public class SSOAuthorizationServerConfig extends AuthorizationServerConfigurerA
     }
 
     /**
-     * JWTtokenStore
+     * JwtTokenStore
      */
     @Bean
     public TokenStore jwtTokenStore() {

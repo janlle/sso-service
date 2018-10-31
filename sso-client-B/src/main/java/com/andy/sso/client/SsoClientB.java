@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Leone
- * @since 2018-05-07 21:25
+ * @since 2018-05-07
  **/
 @RestController
 @EnableOAuth2Sso

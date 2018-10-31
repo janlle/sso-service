@@ -1,4 +1,4 @@
-package com.andy.oauth;
+package com.andy.sso;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2018-05-07
  **/
 @SpringBootApplication
-public class AuthServerApplication {
-
+public class SsoServerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthServerApplication.class, args);
+        SpringApplication.run(SsoServerApplication.class, args);
     }
-
 }

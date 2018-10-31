@@ -3,15 +3,7 @@ package com.andy.sso.client;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.request.RequestContextListener;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author Leone
