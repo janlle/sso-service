@@ -10,7 +10,7 @@
         <version>1.0.2.RELEASE</version>
     </parent>
 
-    <artifactId>sso-client-B</artifactId>
+    <artifactId>sso-client-b</artifactId>
 
     <dependencies>
         <dependency>
@@ -31,6 +31,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
 
     </dependencies>

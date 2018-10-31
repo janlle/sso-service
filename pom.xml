@@ -7,8 +7,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>sso-auth-server</module>
-        <module>sso-client-A</module>
-        <module>sso-client-B</module>
+        <module>sso-client-a</module>
+        <module>sso-client-b</module>
         <module>sso-resource-server</module>
     </modules>
 
@@ -21,7 +21,7 @@
             <dependency>
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
-                <version>Brussels-SR4</version>
+                <version>Brussels-SR9</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
