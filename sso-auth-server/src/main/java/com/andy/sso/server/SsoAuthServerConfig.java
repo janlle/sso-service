@@ -19,35 +19,33 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class SsoAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    /**
+     * 客户端一些配置
+     *
+     * @param clients
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-        .withClient("clienta")
-        .secret("secreta")
-        .authorizedGrantTypes("authorization_code", "refresh_token")
-        .scopes("all")
-        .and()
-        .withClient("clientb")
-        .secret("secretb")
-        .authorizedGrantTypes("authorization_code", "refresh_token")
-        .scopes("all");
-
-//        clients.inMemory()
-//                .withClient("clienta")
-//                .secret("secreta")
-//                .authorizedGrantTypes("authorization_code", "refresh_token")
-//                .scopes("all","read","write")
-//                .autoApprove(true)
-//                .and()
-//                .withClient("clientb")
-//                .secret("secretb")
-//                .authorizedGrantTypes("authorization_code", "refresh_token")
-//                .scopes("all","read","write")
-//                .autoApprove(true);
+                .withClient("client1")
+                .secret("secret1")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all", "read", "write")
+                .autoApprove(true)
+                .and()
+                .withClient("client2")
+                .secret("secret2")
+                .authorizedGrantTypes("authorization_code", "refresh_token")
+                .scopes("all", "read", "write")
+                .autoApprove(true);
     }
 
     /**
      * 配置jwtTokenStore
+     *
+     * @param endpoints
+     * @throws Exception
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
@@ -55,7 +53,10 @@ public class SsoAuthServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
-     * springSecurity 授权表达式，
+     * springSecurity 授权表达式
+     *
+     * @param security
+     * @throws Exception
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -64,6 +65,8 @@ public class SsoAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     /**
      * JwtTokenStore
+     *
+     * @return
      */
     @Bean
     public TokenStore jwtTokenStore() {
@@ -72,9 +75,11 @@ public class SsoAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     /**
      * 生成JTW token
+     *
+     * @return
      */
     @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter(){
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey("andy");
         return converter;
