@@ -6,8 +6,8 @@ security:
     client:
       clientId: clientb
       clientSecret: secretb
-      access-token-uri: http://127.0.0.1:8082/server/oauth/token
-      user-authorization-uri: http://127.0.0.1:8082/server/oauth/authorize
+      access-token-uri: http://127.0.0.1:8082/auth_server/oauth/token
+      user-authorization-uri: http://127.0.0.1:8082/auth_server/oauth/authorize
     resource:
       jwt:
-        key-uri: http://127.0.0.1:8082/server/oauth/token_key
+        key-uri: http://127.0.0.1:8082/auth_server/oauth/token_key

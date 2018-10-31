@@ -1,5 +1,6 @@
 package com.andy.sso.server;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,15 +16,13 @@ import javax.annotation.Resource;
  * @since 2018-05-07
  **/
 @Component
-public class SsoUserDetailService implements UserDetailsService {
+public class SsoUserDetailsService implements UserDetailsService {
 
-    @Resource
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new User(username,
-                passwordEncoder.encode("andy"),
-                AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
+        return new User(username, passwordEncoder.encode("hello"), AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER"));
     }
 }

@@ -27,17 +27,9 @@ public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/authentication/require")
-                .loginProcessingUrl("/authentication/form")
+        http.formLogin()
                 .and().authorizeRequests()
-                .antMatchers("/authentication/require",
-                        "/authentication/form",
-                        "/**/*.js",
-                        "/**/*.css",
-                        "/**/*.jpg",
-                        "/**/*.png",
-                        "/**/*.woff2"
-                )
+                .antMatchers("/**/*.js", "/**/*.css", "/**/*.jpg", "/**/*.png")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -49,5 +41,4 @@ public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
 }
