@@ -1,13 +1,13 @@
 server:
-  port: 8081
+  port: 8080
   servlet-path: /clienta
 security:
   oauth2:
     client:
-      clientId: clienta
-      clientSecret: secreta
-      access-token-uri: http://127.0.0.1:9999/server/oauth/token
-      user-authorization-uri: http://127.0.0.1:9999/server/oauth/authorize
+      clientId: client1
+      clientSecret: secret1
+      access-token-uri: http://127.0.0.1:8082/server/oauth/token    #请求令牌的地址
+      user-authorization-uri: http://127.0.0.1:8082/server/oauth/authorize    #请求认证的地址
     resource:
       jwt:
-        key-uri: http://127.0.0.1:9999/server/oauth/token_key
+        key-uri: http://127.0.0.1:8082/server/oauth/token_key   #解析jwt令牌所需要密钥的地址
