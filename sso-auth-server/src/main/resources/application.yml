@@ -1,3 +1,0 @@
-server:
-  port: 8082
-  context-path: /auth_server
