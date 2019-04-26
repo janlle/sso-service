@@ -1,18 +1,29 @@
 server:
   port: 8001
-  servlet:
-    path: /client1
+
+# 认证服务器地址
+auth-server: http://localhost:10000
 
 security:
   oauth2:
-    resource:
-      token-info-uri: http://localhost:10000/oauth/check_token
-      prefer-token-info: true
-
     client:
-      access-token-uri: http://localhost:10000/oauth/token
-      user-authorization-uri: http://localhost:10000/oauth/authorize
-      client-id: client1
-      client-secret: secret1
-      registered-redirect-uri: http://localhost:8001/index
-
+      # 授权服务器配置的client id
+      client-id: testClient
+      # 授权服务器配置的client secret
+      client-secret: testClient
+      scope: all
+      # 获取access token接口
+      access-token-uri: ${auth-server}/oauth/token
+      # 获取Authorization Code接口
+      user-authorization-uri: ${auth-server}/oauth/authorize
+    resource:
+      # 验证token的接口
+      token-info-uri: ${auth-server}/oauth/check_token
+      # 一个可以获取认证授权的自定义接口，可以在授权服务器，也可以在其他服务器上
+      # user-info-uri: ${auth-server}/user
+      # prefer-token-info: true # 如果同时配置了token-info-uri 和 user-info-uri，这个现象设置使用哪个取验证授权
+spring:
+  security:
+    user:
+      name: user
+      password: user

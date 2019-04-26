@@ -1,6 +1,7 @@
 package com.leone.sso.server.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,9 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BaseController {
 
-    @GetMapping("/redirect")
-    public String redirect(String code) {
-        return code;
+    @RequestMapping(value = "/api/hello")
+    public String hello(String code) {
+        return "hello " + code;
+    }
+
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "logout";
     }
 
 }

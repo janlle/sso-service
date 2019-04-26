@@ -38,6 +38,11 @@ public class TestController {
         return user;
     }
 
+    @GetMapping("/user")
+    public Authentication getUser(Authentication authentication) {
+        log.info("auth : {}", authentication);
+        return authentication;
 
+    }
 
 }

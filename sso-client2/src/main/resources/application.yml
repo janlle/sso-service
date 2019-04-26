@@ -1,29 +1,15 @@
-#server:
-#  port: 8081
-#  context-path: /clientb
-#security:
-#  oauth2:
-#    client:
-#      clientId: client2
-#      clientSecret: secret2
-#      access-token-uri: http://127.0.0.1:8082/auth_server/oauth/token
-#      user-authorization-uri: http://127.0.0.1:8082/auth_server/oauth/authorize
-#    resource:
-#      jwt:
-#        key-uri: http://127.0.0.1:8082/auth_server/oauth/token_key
-
-
 # 认证服务器地址
-auth-server: http://127.0.0.1:10000/auth_server
+auth-server: http://127.0.0.1:10000
 
 server:
-  port: 8001
+  port: 8002
+
 security:
   oauth2:
     client:
-      client-id: testclient
-      client-secret: testclient
-      scope: test
+      client-id: testClient
+      client-secret: testClient
+      scope: all
       access-token-uri: ${auth-server}/oauth/token
       user-authorization-uri: ${auth-server}/oauth/authorize
     resource:

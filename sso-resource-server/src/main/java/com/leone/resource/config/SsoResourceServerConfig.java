@@ -1,15 +1,11 @@
 package com.leone.resource.config;
 
 
-import org.apache.catalina.filters.RequestDumperFilter;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
  * <p>
@@ -17,26 +13,23 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
  * @author leone
  * @since 2018-10-31
  **/
-//@Configuration
-//@EnableResourceServer
-//public class SsoResourceServerConfig extends ResourceServerConfigurerAdapter {
-//
-//    @Override
-//    public void configure(HttpSecurity http) throws Exception {
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers(HttpMethod.GET, "/api/**")
-//                .access("#oauth2.hasScope('read')")
-//                .antMatchers(HttpMethod.POST, "/api/**")
-//                .access("#oauth2.hasScope('write')");
-//    }
-//
-//    @Bean
-//    @Profile("!cloud")
-//    public RequestDumperFilter requestDumperFilter() {
-//        return new RequestDumperFilter();
-//    }
-//
-//}
+@Configuration
+public class SsoResourceServerConfig extends ResourceServerConfigurerAdapter {
+    private static final String DEMO_RESOURCE_ID = "*";
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+        resources.resourceId(DEMO_RESOURCE_ID).stateless(true);
+    }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and().requestMatchers().anyRequest()
+                .and().anonymous()
+                .and().authorizeRequests()
+                // .antMatchers("/product/**").access("#oauth2.hasScope('select') and hasRole('ROLE_USER')")
+                // 配置访问权限控制，必须认证过后才可以访问
+                .antMatchers("/**").authenticated();
+    }
+}

@@ -8,9 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
- * <p> 
+ * <p>
  *
  * @author leone
  * @since 2019-04-24
@@ -20,8 +21,8 @@ public class SimpleCorsFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        httpServletRequest.setCharacterEncoding("utf-8");
-        httpServletResponse.setCharacterEncoding("utf-8");
+        httpServletRequest.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
+        httpServletResponse.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
         httpServletResponse.setHeader("Content-Type", "application/json");
         httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");//允许所以域名访问，
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");//允许的访问方式

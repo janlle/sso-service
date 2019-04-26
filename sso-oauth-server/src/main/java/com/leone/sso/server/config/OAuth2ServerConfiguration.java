@@ -1,99 +1,78 @@
 package com.leone.sso.server.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.builders.ClientDetailsServiceBuilder;
-import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 /**
- * <p> 
+ * <p>
  *
  * @author leone
  * @since 2019-04-24
  **/
 @Configuration
-public class OAuth2ServerConfiguration extends AuthorizationServerConfigurerAdapter{
+public class OAuth2ServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    /**
+     * 配置token获取合验证时的策略
+     *
+     * @param security
+     * @throws Exception
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+    }
+
+    /**
+     * 配置oauth2的 client信息这里的配置会覆盖配置文件中的配置
+     *
+     * @param clients
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-//        ClientDetailsServiceBuilder<InMemoryClientDetailsServiceBuilder>.ClientBuilder builder = clients.inMemory().withClient("client_1");
-//        // 加密
-//        builder.secret(passwordEncoder().encode("123456")).authorizedGrantTypes("client_credentials","password","refresh_token");
-
+        // secret密码配置从 Spring Security 5.0开始必须以 {bcrypt}+加密后的密码 这种格式填写
         clients.inMemory()
-                .withClient("client1")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-                .scopes("read","write")
-                .secret("secret1")
-                .accessTokenValiditySeconds(120) //Access token is only valid for 2 minutes.
-                .refreshTokenValiditySeconds(600) //Refresh token is only valid for 10 minutes.
-                .redirectUris("http://localhost:10000/redirect");
-
+                .withClient("testClient")
+                .accessTokenValiditySeconds(7200)
+                .secret(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("testClient"))
+                // authorizedGrantTypes 有4种，这里只开启 3 种
+                .authorizedGrantTypes("authorization_code", "refresh_token", "password")
+                .scopes("all");
     }
 
+    /**
+     * 设置自定义的token存储策略
+     *
+     * @param endpoints
+     * @throws Exception
+     */
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager())
-        .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.authenticationManager(authenticationManager).tokenStore(memoryTokenStore());
     }
 
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        // 允许表单认证
-        oauthServer.allowFormAuthenticationForClients();
-        // 允许check_token访问
-        oauthServer.checkTokenAccess("permitAll()");
-    }
-
+    /**
+     * token 的存储策略
+     *
+     * @return
+     */
     @Bean
-    public AuthenticationManager authenticationManager(){
-        return new AuthenticationManager() {
-            @Override
-            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                return daoAuthenticationProvider().authenticate(authentication);
-            }
-        };
+    public TokenStore memoryTokenStore() {
+        return new InMemoryTokenStore();
     }
 
-    @Bean
-    public AuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService());
-        daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        return daoAuthenticationProvider;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager userDetailsService = new InMemoryUserDetailsManager();
-        userDetailsService.createUser(User.withUsername("user_1").password(passwordEncoder().encode("123456")).authorities("ROLE_USER").build());
-        userDetailsService.createUser(User.withUsername("user_2").password(passwordEncoder().encode("123456")).authorities("ROLE_USER").build());
-        return userDetailsService;
-    }
-
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 }
