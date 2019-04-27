@@ -32,4 +32,5 @@ public class SimpleCorsFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
+
 }

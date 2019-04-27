@@ -34,15 +34,6 @@ public class Oauth2SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("admin").password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("admin")).roles("admin");
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/oauth/**")
-                .permitAll()
-                .and()
-                .csrf()
-                .disable();
-    }
 
 }
 

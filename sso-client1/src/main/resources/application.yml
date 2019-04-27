@@ -24,6 +24,7 @@ security:
       # prefer-token-info: true # 如果同时配置了token-info-uri 和 user-info-uri，这个现象设置使用哪个取验证授权
     authorization:
       check-token-access: ${auth-server}/oauth/check_token
+
 spring:
   security:
     user:

@@ -49,9 +49,10 @@ public class OAuth2ServerConfiguration extends AuthorizationServerConfigurerAdap
                 .withClient("testClient")
                 .accessTokenValiditySeconds(7200)
                 .secret(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("testClient"))
-                // authorizedGrantTypes 有4种，这里只开启 3 种
-                .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .scopes("all");
+                // authorizedGrantTypes 有4种
+                .authorizedGrantTypes("authorization_code", "refresh_token", "password", "implicit")
+                .scopes("all")
+                .redirectUris("http://baidu.com");
     }
 
     /**
