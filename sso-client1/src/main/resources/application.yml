@@ -22,6 +22,8 @@ security:
       # 一个可以获取认证授权的自定义接口，可以在授权服务器，也可以在其他服务器上
       # user-info-uri: ${auth-server}/user
       # prefer-token-info: true # 如果同时配置了token-info-uri 和 user-info-uri，这个现象设置使用哪个取验证授权
+    authorization:
+      check-token-access: ${auth-server}/oauth/check_token
 spring:
   security:
     user:

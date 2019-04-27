@@ -12,11 +12,12 @@ OAuth 2.0是OAuth协议的下一版本，但不向下兼容OAuth 1.0。OAuth 2.0
 
 Facebook的新的Graph API只支持OAuth 2.0，Google在2011年3月也宣布Google API对OAuth 2.0的支持，Windows Live也支持OAuth 2.0。
 
+
 **名词定义**
 
-* 1、Third-party application：第三方应用程序，本文中又称"客户端"（client），即上一节例子中的"云冲印"。
+* 1、Third-party application：第三方应用程序，本文中又称"客户端"（client）。
 
-* 2、HTTP service：HTTP服务提供商，本文中简称"服务提供商"，即上一节例子中的Google。
+* 2、HTTP service：HTTP服务提供商，本文中简称"服务提供商"。
 
 * 3、Resource Owner：资源所有者，本文中又称"用户"（user）。
 
@@ -25,6 +26,7 @@ Facebook的新的Graph API只支持OAuth 2.0，Google在2011年3月也宣布Goog
 * 5、Authorization server：认证服务器，即服务提供商专门用来处理认证的服务器。
 
 * 6、Resource server：资源服务器，即服务提供商存放用户生成的资源的服务器。它与认证服务器，可以是同一台服务器，也可以是不同的服务器。
+
 
 **OAuth的思路**
 

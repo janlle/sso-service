@@ -2,13 +2,13 @@ server:
   port: 10000
 
 
-spring:
-  security:
-    user:
-      name: user
-      password: user
-security:
-  oauth2:
-    client:
-      client-id: client
-      client-secret: secret
+#spring:
+#  security:
+#    user:
+#      name: user
+#      password: user
+#security:
+#  oauth2:
+#    client:
+#      client-id: client
+#      client-secret: secret
