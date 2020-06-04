@@ -1,33 +1,31 @@
-package com.leone.resource;
+package com.leone.sso.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * <p>
- *
  * @author leone
- * @since 2018-09-19
+ * @since 2018-05-07
  **/
 @RestController
-@EnableResourceServer
+@EnableOAuth2Sso
 @SpringBootApplication
-public class ResourceServerApplication {
+public class Client2Application {
+
 
     public static void main(String[] args) {
-        SpringApplication.run(ResourceServerApplication.class, args);
+        SpringApplication.run(Client2Application.class, args);
     }
 
-    @GetMapping("/api/user")
+    @GetMapping("/user")
     public Authentication getUser(Authentication authentication) {
-        System.out.println("resource: user " + authentication);
+        System.out.println("auth: " + authentication);
         return authentication;
-    }
 
+    }
 
 }
