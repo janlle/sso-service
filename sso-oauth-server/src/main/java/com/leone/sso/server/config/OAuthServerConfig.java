@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -19,10 +20,13 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
  * @since 2019-04-24
  **/
 @Configuration
-public class OAuth2ServerConfiguration extends AuthorizationServerConfigurerAdapter {
+public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 配置token获取合验证时的策略
@@ -32,8 +36,8 @@ public class OAuth2ServerConfiguration extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        // security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
-        security.tokenKeyAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+        //security.tokenKeyAccess("isAuthenticated()");
     }
 
     /**
@@ -48,11 +52,12 @@ public class OAuth2ServerConfiguration extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("testClient")
                 .accessTokenValiditySeconds(7200)
-                .secret(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("testClient"))
+                .secret(bCryptPasswordEncoder.encode("testClient"))
                 // authorizedGrantTypes 有4种
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password", "implicit")
                 .scopes("all")
-                .redirectUris("http://baidu.com");
+                .redirectUris("http://127.0.0.1:8001/login", "http://127.0.0.1:8002/login")
+                .accessTokenValiditySeconds(30);
     }
 
     /**

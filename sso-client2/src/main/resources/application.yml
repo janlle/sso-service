@@ -1,5 +1,5 @@
 # 认证服务器地址
-auth-server: http://127.0.0.1:10000
+auth-server: http://127.0.0.1:9999
 
 server:
   port: 8002
