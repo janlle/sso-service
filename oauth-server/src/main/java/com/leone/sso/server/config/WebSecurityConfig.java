@@ -18,7 +18,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
  **/
 @Order(1)
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * oauth配置中需要用到
@@ -36,29 +36,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user")
-                .password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("user"))
+                .password(bCryptPasswordEncoder().encode("user"))
                 .roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
-                .antMatchers("/login")
-                .antMatchers("/oauth/authorize")
+//        http.formLogin()
+//                .loginPage("/authentication/require")
+//                .loginProcessingUrl("/authentication/form")
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/authentication/require", "/authentication/form")
+//                .permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .csrf()
+//                .disable();
+        http.formLogin()
                 .and()
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()    // 自定义登录页面，这里配置了 loginPage, 就会通过 LoginController 的 login 接口加载登录页面
-                .and()
-                .csrf()
-                .disable();
+                .anyRequest()
+                .authenticated();
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

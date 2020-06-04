@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -20,6 +21,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
  * @since 2019-04-24
  **/
 @Configuration
+@EnableAuthorizationServer
 public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -37,7 +39,6 @@ public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
-        //security.tokenKeyAccess("isAuthenticated()");
     }
 
     /**
@@ -48,16 +49,21 @@ public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // secret密码配置从 Spring Security 5.0开始必须以 {bcrypt}+加密后的密码 这种格式填写
         clients.inMemory()
-                .withClient("testClient")
-                .accessTokenValiditySeconds(7200)
-                .secret(bCryptPasswordEncoder.encode("testClient"))
-                // authorizedGrantTypes 有4种
+                .withClient("client1")
+                .secret(bCryptPasswordEncoder.encode("154654"))
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password", "implicit")
-                .scopes("all")
-                .redirectUris("http://127.0.0.1:8001/login", "http://127.0.0.1:8002/login")
-                .accessTokenValiditySeconds(30);
+                .accessTokenValiditySeconds(7200)
+                .scopes("user_info")
+                .redirectUris("http://127.0.0.1:8001/login")
+                .and()
+                .withClient("client2")
+                .secret(bCryptPasswordEncoder.encode("165236"))
+                .authorizedGrantTypes("authorization_code", "refresh_token", "password", "implicit")
+                .accessTokenValiditySeconds(7200)
+                .scopes("user_info")
+                .redirectUris("http://127.0.0.1:8002/login");
+
     }
 
     /**

@@ -7,9 +7,8 @@ server:
 security:
   oauth2:
     client:
-      client-id: testClient
-      client-secret: testClient
-      scope: all
+      client-id: client2
+      client-secret: 165236
       access-token-uri: ${auth-server}/oauth/token
       user-authorization-uri: ${auth-server}/oauth/authorize
     resource:
