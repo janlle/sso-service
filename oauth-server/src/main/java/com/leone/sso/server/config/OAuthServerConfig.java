@@ -55,14 +55,14 @@ public class OAuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password", "implicit")
                 .accessTokenValiditySeconds(7200)
                 .scopes("user_info")
-                .redirectUris("http://127.0.0.1:8001/login")
+                .redirectUris("http://127.0.0.1:8001/ui/user")
                 .and()
                 .withClient("client2")
                 .secret(bCryptPasswordEncoder.encode("165236"))
-                .authorizedGrantTypes("authorization_code", "refresh_token", "password", "implicit")
-                .accessTokenValiditySeconds(7200)
+                .authorizedGrantTypes("authorization_code")
                 .scopes("user_info")
-                .redirectUris("http://127.0.0.1:8002/login");
+                .autoApprove(true)
+                .redirectUris("http://127.0.0.1:8002/ui/login");
 
     }
 

@@ -1,8 +1,10 @@
 # 认证服务器地址
-auth-server: http://127.0.0.1:9999
+auth-server: http://127.0.0.1:9999/auth
 
 server:
   port: 8002
+  servlet:
+    contextPath: /ui
 
 security:
   oauth2:
@@ -12,4 +14,4 @@ security:
       access-token-uri: ${auth-server}/oauth/token
       user-authorization-uri: ${auth-server}/oauth/authorize
     resource:
-      token-info-uri: ${auth-server}/oauth/check_token
+      user-info-uri: ${auth-server}/user
