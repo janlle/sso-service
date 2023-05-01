@@ -2,15 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>spring-security-examples</artifactId>
         <groupId>com.leone.security</groupId>
         <version>1.0.5</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>client2</artifactId>
+    <artifactId>spring-security-old</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -23,29 +28,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
+    
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- springboot2.0已经将oauth2.0与security整合在一起 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!-- 由于一些注解和API从spring security5.0中移除，所以需要导入下面的依赖包  -->
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-            <version>2.0.1.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
     </dependencies>

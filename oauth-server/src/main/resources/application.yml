@@ -1,4 +1,9 @@
 server:
   port: 9999
-  servlet:
-    contentPath: /auth
+
+spring:
+  security:
+    user:
+      name: leone
+      password: 123456
+      roles: admin
